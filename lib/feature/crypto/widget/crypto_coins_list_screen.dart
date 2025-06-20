@@ -12,25 +12,17 @@ class CryptoCoinsListScreen extends StatefulWidget {
 
 class _CryptoCoinsListScreenState extends State<CryptoCoinsListScreen> {
   final _scrollController = ScrollController();
-  final _limit = 15;
-
-  Future<void> _loadMore(CryptoCoinsController controller) async {
-    controller.reloadData(
-      limit: _limit,
-    );
-  }
 
   @override
   void initState() {
     super.initState();
     final controller = CryptoCoinsScope.controllerOf(context);
-
-    _loadMore(controller);
+    controller.reloadData();
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
-        _loadMore(controller);
+        controller.reloadNextPack();
       }
     });
   }
@@ -105,7 +97,7 @@ class _CryptoCoinsListScreenState extends State<CryptoCoinsListScreen> {
                       SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          _loadMore(controller);
+                          controller.reloadData();
                         },
                         child: Text('reload'),
                       ),

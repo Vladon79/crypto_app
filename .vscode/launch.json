@@ -1,0 +1,10 @@
+{
+    
+    "configurations": [
+       {
+		"name": "Crypto",
+		"request": "launch",
+		"type": "dart",
+	    }
+    ]
+}

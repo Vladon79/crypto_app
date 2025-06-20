@@ -622,44 +622,43 @@ abstract class CryptoCoinsState$Error extends CryptoCoinsState {
 
 /// @nodoc
 mixin _$CryptoCoinsEvent {
-  int get limit => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int limit) reloadData,
+    required TResult Function() reloadNextPack,
+    required TResult Function() reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? reloadData,
+    TResult? Function()? reloadNextPack,
+    TResult? Function()? reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? reloadData,
+    TResult Function()? reloadNextPack,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_ReloadNextPack value) reloadNextPack,
     required TResult Function(_ReloadData value) reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ReloadNextPack value)? reloadNextPack,
     TResult? Function(_ReloadData value)? reloadData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ReloadNextPack value)? reloadNextPack,
     TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of CryptoCoinsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $CryptoCoinsEventCopyWith<CryptoCoinsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -668,8 +667,6 @@ abstract class $CryptoCoinsEventCopyWith<$Res> {
   factory $CryptoCoinsEventCopyWith(
           CryptoCoinsEvent value, $Res Function(CryptoCoinsEvent) then) =
       _$CryptoCoinsEventCopyWithImpl<$Res, CryptoCoinsEvent>;
-  @useResult
-  $Res call({int limit});
 }
 
 /// @nodoc
@@ -684,29 +681,119 @@ class _$CryptoCoinsEventCopyWithImpl<$Res, $Val extends CryptoCoinsEvent>
 
   /// Create a copy of CryptoCoinsEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_value.copyWith(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$ReloadDataImplCopyWith<$Res>
-    implements $CryptoCoinsEventCopyWith<$Res> {
+abstract class _$$ReloadNextPackImplCopyWith<$Res> {
+  factory _$$ReloadNextPackImplCopyWith(_$ReloadNextPackImpl value,
+          $Res Function(_$ReloadNextPackImpl) then) =
+      __$$ReloadNextPackImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReloadNextPackImplCopyWithImpl<$Res>
+    extends _$CryptoCoinsEventCopyWithImpl<$Res, _$ReloadNextPackImpl>
+    implements _$$ReloadNextPackImplCopyWith<$Res> {
+  __$$ReloadNextPackImplCopyWithImpl(
+      _$ReloadNextPackImpl _value, $Res Function(_$ReloadNextPackImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CryptoCoinsEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReloadNextPackImpl extends _ReloadNextPack {
+  const _$ReloadNextPackImpl() : super._();
+
+  @override
+  String toString() {
+    return 'CryptoCoinsEvent.reloadNextPack()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ReloadNextPackImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() reloadNextPack,
+    required TResult Function() reloadData,
+  }) {
+    return reloadNextPack();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? reloadNextPack,
+    TResult? Function()? reloadData,
+  }) {
+    return reloadNextPack?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? reloadNextPack,
+    TResult Function()? reloadData,
+    required TResult orElse(),
+  }) {
+    if (reloadNextPack != null) {
+      return reloadNextPack();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ReloadNextPack value) reloadNextPack,
+    required TResult Function(_ReloadData value) reloadData,
+  }) {
+    return reloadNextPack(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ReloadNextPack value)? reloadNextPack,
+    TResult? Function(_ReloadData value)? reloadData,
+  }) {
+    return reloadNextPack?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ReloadNextPack value)? reloadNextPack,
+    TResult Function(_ReloadData value)? reloadData,
+    required TResult orElse(),
+  }) {
+    if (reloadNextPack != null) {
+      return reloadNextPack(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReloadNextPack extends CryptoCoinsEvent {
+  const factory _ReloadNextPack() = _$ReloadNextPackImpl;
+  const _ReloadNextPack._() : super._();
+}
+
+/// @nodoc
+abstract class _$$ReloadDataImplCopyWith<$Res> {
   factory _$$ReloadDataImplCopyWith(
           _$ReloadDataImpl value, $Res Function(_$ReloadDataImpl) then) =
       __$$ReloadDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int limit});
 }
 
 /// @nodoc
@@ -719,76 +806,54 @@ class __$$ReloadDataImplCopyWithImpl<$Res>
 
   /// Create a copy of CryptoCoinsEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? limit = null,
-  }) {
-    return _then(_$ReloadDataImpl(
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$ReloadDataImpl extends _ReloadData {
-  const _$ReloadDataImpl({required this.limit}) : super._();
-
-  @override
-  final int limit;
+  const _$ReloadDataImpl() : super._();
 
   @override
   String toString() {
-    return 'CryptoCoinsEvent.reloadData(limit: $limit)';
+    return 'CryptoCoinsEvent.reloadData()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ReloadDataImpl &&
-            (identical(other.limit, limit) || other.limit == limit));
+        (other.runtimeType == runtimeType && other is _$ReloadDataImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, limit);
-
-  /// Create a copy of CryptoCoinsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ReloadDataImplCopyWith<_$ReloadDataImpl> get copyWith =>
-      __$$ReloadDataImplCopyWithImpl<_$ReloadDataImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int limit) reloadData,
+    required TResult Function() reloadNextPack,
+    required TResult Function() reloadData,
   }) {
-    return reloadData(limit);
+    return reloadData();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int limit)? reloadData,
+    TResult? Function()? reloadNextPack,
+    TResult? Function()? reloadData,
   }) {
-    return reloadData?.call(limit);
+    return reloadData?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int limit)? reloadData,
+    TResult Function()? reloadNextPack,
+    TResult Function()? reloadData,
     required TResult orElse(),
   }) {
     if (reloadData != null) {
-      return reloadData(limit);
+      return reloadData();
     }
     return orElse();
   }
@@ -796,6 +861,7 @@ class _$ReloadDataImpl extends _ReloadData {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_ReloadNextPack value) reloadNextPack,
     required TResult Function(_ReloadData value) reloadData,
   }) {
     return reloadData(this);
@@ -804,6 +870,7 @@ class _$ReloadDataImpl extends _ReloadData {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ReloadNextPack value)? reloadNextPack,
     TResult? Function(_ReloadData value)? reloadData,
   }) {
     return reloadData?.call(this);
@@ -812,6 +879,7 @@ class _$ReloadDataImpl extends _ReloadData {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ReloadNextPack value)? reloadNextPack,
     TResult Function(_ReloadData value)? reloadData,
     required TResult orElse(),
   }) {
@@ -823,16 +891,6 @@ class _$ReloadDataImpl extends _ReloadData {
 }
 
 abstract class _ReloadData extends CryptoCoinsEvent {
-  const factory _ReloadData({required final int limit}) = _$ReloadDataImpl;
+  const factory _ReloadData() = _$ReloadDataImpl;
   const _ReloadData._() : super._();
-
-  @override
-  int get limit;
-
-  /// Create a copy of CryptoCoinsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReloadDataImplCopyWith<_$ReloadDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }

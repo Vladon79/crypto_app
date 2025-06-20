@@ -28,9 +28,9 @@ sealed class CryptoCoinsState with _$CryptoCoinsState {
 /* #region CryptoCoinsEvent */
 @freezed
 sealed class CryptoCoinsEvent with _$CryptoCoinsEvent {
-  const factory CryptoCoinsEvent.reloadData({
-    required int limit,
-  }) = _ReloadData;
+  const factory CryptoCoinsEvent.reloadNextPack() = _ReloadNextPack;
+
+  const factory CryptoCoinsEvent.reloadData() = _ReloadData;
 
   const CryptoCoinsEvent._();
 }
@@ -48,14 +48,17 @@ class CryptoCoinsBloc extends Bloc<CryptoCoinsEvent, CryptoCoinsState> {
     on<CryptoCoinsEvent>(
       (event, emit) async => switch (event) {
         final _ReloadData event => _reloadData(event, emit),
+        final _ReloadNextPack event => _reloadNextPack(event, emit),
       },
     );
   }
 
   final CryptoCoinsRepository _cryptoCoinsRepository;
 
-  Future<void> _reloadData(
-    _ReloadData event,
+  final _limit = 15;
+
+  Future<void> _reloadNextPack(
+    _ReloadNextPack event,
     Emitter<CryptoCoinsState> emit,
   ) async {
     try {
@@ -67,7 +70,7 @@ class CryptoCoinsBloc extends Bloc<CryptoCoinsEvent, CryptoCoinsState> {
 
       if (state.cryptoCoins case final currentCryptoCoins?) {
         final newCoins = await _cryptoCoinsRepository.fetchCryptoCoins(
-          limit: event.limit,
+          limit: _limit,
           offset: currentCryptoCoins.length,
         );
 
@@ -80,13 +83,8 @@ class CryptoCoinsBloc extends Bloc<CryptoCoinsEvent, CryptoCoinsState> {
           CryptoCoinsState.idle(cryptoCoins: updatedCoins),
         );
       } else {
-        final newCoins = await _cryptoCoinsRepository.fetchCryptoCoins(
-          limit: event.limit,
-          offset: 0,
-        );
-
         emit(
-          CryptoCoinsState.idle(cryptoCoins: newCoins),
+          CryptoCoinsState.idle(cryptoCoins: state.cryptoCoins),
         );
       }
     } catch (error) {
@@ -96,6 +94,39 @@ class CryptoCoinsBloc extends Bloc<CryptoCoinsEvent, CryptoCoinsState> {
           error: error,
         ),
       );
+
+      rethrow;
+    }
+  }
+
+  Future<void> _reloadData(
+    _ReloadData event,
+    Emitter<CryptoCoinsState> emit,
+  ) async {
+    try {
+      emit(
+        CryptoCoinsState$Loading(
+          cryptoCoins: state.cryptoCoins,
+        ),
+      );
+
+      final newCoins = await _cryptoCoinsRepository.fetchCryptoCoins(
+        limit: _limit,
+        offset: 0,
+      );
+
+      emit(
+        CryptoCoinsState.idle(cryptoCoins: newCoins),
+      );
+    } catch (error) {
+      emit(
+        CryptoCoinsState$Error(
+          cryptoCoins: state.cryptoCoins,
+          error: error,
+        ),
+      );
+
+      rethrow;
     }
   }
 }

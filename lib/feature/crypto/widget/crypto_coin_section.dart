@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:test_project/feature/crypto/model/crypto.dart';
@@ -10,7 +11,7 @@ class CryptoCoinSection extends StatelessWidget {
 
   final CryptoCoin coin;
 
-  final TextStyle _textStyle = const TextStyle(
+  final _textStyle = const TextStyle(
     fontSize: 17,
     height: 24 / 17,
     color: Color(0xff17171A),
@@ -49,4 +50,10 @@ class CryptoCoinSection extends StatelessWidget {
           ),
         ],
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CryptoCoin>('coin', coin));
+  }
 }

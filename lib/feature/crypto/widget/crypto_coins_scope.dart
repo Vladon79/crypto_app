@@ -9,9 +9,9 @@ import 'package:test_project/feature/init/widget/core_dependencies_scope.dart';
 import 'package:test_project/feature/crypto/bloc/crypto_coins_bloc.dart';
 
 abstract interface class CryptoCoinsController {
-  Future<void> reloadData({
-    required int limit,
-  });
+  Future<void> reloadData();
+
+  Future<void> reloadNextPack();
 }
 
 class CryptoCoinsScope extends StatefulWidget {
@@ -43,6 +43,12 @@ class CryptoCoinsScope extends StatefulWidget {
 
   @override
   State<CryptoCoinsScope> createState() => _CryptoCoinsScopeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Widget>('child', child));
+  }
 }
 
 class _CryptoCoinsScopeState extends State<CryptoCoinsScope>
@@ -52,13 +58,16 @@ class _CryptoCoinsScopeState extends State<CryptoCoinsScope>
 
 /* #region CryptoCoinsController */
   @override
-  Future<void> reloadData({
-    required int limit,
-  }) async {
+  Future<void> reloadData() async {
     _bloc.add(
-      CryptoCoinsEvent.reloadData(
-        limit: limit,
-      ),
+      CryptoCoinsEvent.reloadData(),
+    );
+  }
+
+  @override
+  Future<void> reloadNextPack() async {
+    _bloc.add(
+      CryptoCoinsEvent.reloadNextPack(),
     );
   }
 /* #endregion */
@@ -71,9 +80,7 @@ class _CryptoCoinsScopeState extends State<CryptoCoinsScope>
     _bloc = CryptoCoinsBloc(
       cryptoCoinsRepository: context.dependencies.cryptoCoinsRepository,
     )..add(
-        CryptoCoinsEvent.reloadData(
-          limit: 15,
-        ),
+        CryptoCoinsEvent.reloadData(),
       );
   }
 

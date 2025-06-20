@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:test_project/feature/crypto/model/fetch_crypto_coins_exception.dart';
 import 'package:test_project/feature/crypto/model/crypto_dto.dart';
 
 abstract class CryptoCoinsDataSource {
@@ -38,10 +39,12 @@ final class DioCryptoCoinsDataSource implements CryptoCoinsDataSource {
       return jsonList
           .map((coinJson) => CryptoCoinDto.fromJson(coinJson))
           .toList();
-    } on DioException {
-      throw 'Error loading cryptocurrency data';
-    } catch (error) {
-      rethrow;
+    } catch (error, stackTrace) {
+      throw FetchCryptoCoinsException(
+        'Error receiving cryptocurrencies',
+        originalError: error,
+        stackTrace: stackTrace,
+      );
     }
   }
 }
